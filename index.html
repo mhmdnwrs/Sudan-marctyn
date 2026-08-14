@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>السوق السوداني</title>
+  <title>السوق السوداني - مقارنة الأسعار</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,7 +28,7 @@
       <button class="icon-btn" onclick="showScreen('splash')">→</button>
       <h1>مرحباً بك مجدداً</h1>
       <p>سجل الدخول لمتابعة أسعار السوق</p>
-      <div class="form-group"><label>البريد الإلكتروني</label><input id="loginEmail" type="email" placeholder="example@email.com"></div>
+      <div class="form-group"><label>البريد الإلكتروني أو اسم المستخدم</label><input id="loginEmail" type="text" placeholder="مثال: anas@market.com"></div>
       <div class="form-group"><label>كلمة المرور</label><input id="loginPass" type="password" placeholder="••••••••"></div>
       <div style="text-align:left;margin-bottom:18px"><button class="link">نسيت كلمة المرور؟</button></div>
       <button class="primary" onclick="login()">تسجيل الدخول</button>
@@ -48,10 +48,21 @@
         <p id="gpsStatus">جاري تحديد الموقع...</p>
       </div>
     </div>
+    
+    <!-- BANNER FOR QUICK COMPARISON -->
+    <div class="compare-banner" onclick="showScreen('compare')">
+      <div class="compare-banner-text">
+        ⚡ <strong>مقارنة الأسعار بين الأسواق</strong>
+        <span>اعرف أرخص سوق لشراء السكر، الخضروات، اللحوم وغيرها!</span>
+      </div>
+      <button class="btn btn-green">قارن الآن</button>
+    </div>
+
     <div class="search">
       <span>🔎</span>
       <input id="searchInput" placeholder="ابحث عن منتج أو سوق..." oninput="renderProducts()">
     </div>
+    
     <div class="section">
       <div class="section-title">
         <h3>الأسواق الرئيسية</h3>
@@ -59,6 +70,7 @@
       </div>
       <div class="markets" id="marketHome"></div>
     </div>
+
     <div class="section">
       <div class="section-title">
         <h3>الأقسام الرئيسية</h3>
@@ -71,12 +83,37 @@
         <div class="cat" onclick="filterCategory('حبوب')"><span class="emoji">🌾</span><b>الحبوب</b></div>
       </div>
     </div>
+
     <div class="section">
       <div class="section-title">
         <h3>أحدث الأسعار</h3>
         <button onclick="showScreen('products')">المزيد</button>
       </div>
       <div class="products" id="homeProducts"></div>
+    </div>
+    <nav class="bottom-nav"></nav>
+  </section>
+
+  <!-- COMPARE SCREEN (مقارنة الأسعار) -->
+  <section id="compare" class="screen">
+    <div class="topbar">
+      <button class="icon-btn" onclick="showScreen('home')">→</button>
+      <div class="logo-small">⚖️ مقارنة الأسعار</div>
+      <div></div>
+    </div>
+    <div class="page-content">
+      <div class="compare-header">
+        <h3>قارن أسعار السلع عبر الأسواق</h3>
+        <p>اختر منتجاً للاطلاع على فرقات الأسعار وتحديد الخيار الأرخص فوراً</p>
+      </div>
+      <div class="search" style="margin:10px 0 15px">
+        <span>🔎</span>
+        <input id="compareSearchInput" placeholder="ابحث عن سلعة لمقارنتها (مثال: سكر، موز، طماطم)..." oninput="renderCompare()">
+      </div>
+
+      <div id="compareContainer">
+        <!-- سيتم توليد كروت المقارنة هنا -->
+      </div>
     </div>
     <nav class="bottom-nav"></nav>
   </section>
@@ -131,7 +168,7 @@
         <p id="profileEmail" style="color:var(--muted)"></p>
       </div>
       <div class="card">
-        <button class="primary" style="margin-bottom:10px" onclick="showScreen('admin')">لوحة الإدارة</button>
+        <button class="primary" style="margin-bottom:10px" id="adminPanelBtn" onclick="showScreen('admin')">لوحة الإدارة</button>
         <button class="btn btn-red" style="width:100%;height:45px" onclick="logout()">تسجيل الخروج</button>
       </div>
     </div>
@@ -191,3 +228,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+
